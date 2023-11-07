@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Haushaltsrechner</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+
+    <body>
+
+        <nav id="navigation">
+            <div id="logo"></div>
+            <div class="headline">HAUSHALTSPLANER</div>
+            <ul class="list">
+            <li><a href="kontakt.html">Kontakt</a></li>
+            </ul>
+            </nav>
+            <br>
+
+<div class="row">
+  <div class="column" style="background-color:#aaa;">
+    <h2>Elemente</h2>
+    <div class="w3-container">
+      
+        <table class="w3-table w3-striped">
+            <div id="ausgabe2"></div>
+        </table>
+    </div>
+    <table id="accountingTable" class="w3-table-all">
+      <thead>
+        <tr class="w3-red">
+          <th>ID</th>
+          <th>Titel</th>
+          <th>Typ</th>
+          <th>Datum</th>
+          <th>Betrag</th>
+          <th>Bilanz</th>
+        </tr>
+      </thead>
+      <!--js geniert die Daten hier hinein-->
+    </table>
+
+
+
+  </div>
+  <div class="column" style="background-color:#bbb;">
+    <h2>Eingabe</h2>
+    <form id="eingabefeld">
+        <label for="titel">Titel:</label> <br>
+        <input type="text" id="titel" name="titel"> <br>
+        <label for="betrag">Betrag:</label> <br>
+        <input type="text" id="betrag" name="betrag"> <br>
+        <label for="einnahme_ausgabe">Einnahme/Ausgabe</label> <br>
+        <input type="text" id="einnahme_ausgabe" name="einnahme_ausgabe"> <br>
+        <label for="datum">Datum:</label> <br>
+        <input type="text" id="datum" name="datum"> <br>
+        <button type="button" id="button">Speichern</button> <br> <br>
+
+        
+    </form>
+  </div>
+  <div class="column" style="background-color:#ccc;">
+    <h2>Bilanz</h2>
+    <div id="bilanz"></div>
+  </div>
+</div>
+        <script src="DataModel.js"></script>
+        <script src="main.js"></script>
+    </body>
+
+</html>

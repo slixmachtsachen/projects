@@ -1,37 +1,75 @@
 /******************************************************************************
-Eine Forschungseinrichtung für neue Pflanzen benutzt Beete in rechteckiger Form.
-Man kann sich das Beet wie ein rechteckiges Schachbrett vorstellen.
-Die Felder haben eine eindeutige Nummer.
-Das Feld oben links ist A1, das Feld unten recht ist z.B. G8
+ Für die Prüfungsaufgaben zum Thema Algorithmen ist das Verständnis von zweidimensionalen Arrays sehr wichtig. Dazu eine erste Aufgabe:
 
-Ein Automat wertet ein Beet aus und liefert ein boolsches zweidimensionales array mit Werten.
-True steht für Pflanze ist okay. False steht für Pflanze krank oder tot.
-Theoretisch kann es beliebig viele Reihen und Spalten geben.
+ Gegeben ist ein 2D-Array. In jeder Zeile sind Tagestemperaturen gespeichert. Zu jeder vollen Stunde wird gemessen.  Jeder Tag ist eine Zeile.
 
-Sie haben die Aufgabe, verschiedene Auswertungen auf das gegebene Array durchzuführen.
+ public static double tagTemp(int[][] values) {
+ …
+ }
 
-a) Schreiben Sie eine Funktion "overviewBeet", die eine Liste in dieser Form ausgibt.
-A O - O O O - 
-B - O - - - -
-Hinweise: O steht für Pflanze lebt = true. 
-         - steht für Pflanze ist tot
-         Die Zeile 0 im Array steht für die Feldreihe A. 
-         Hinweis: Schauen Sie in die Ascii-Tabelle um von 0 auf A zu kommen.
+ Die Java-Funktion berechnet den Maximalwert und den Minimalwert aller Temperaturen und berechnet die Differenz double diff = maxVal - minVal;
 
-b) Schreiben Sie eine Funktion "statBeet", die berechnet, wieviel 
-  Prozent der Pflanzen am Leben sind und den Wert zurückliefert.
-  
-Wichtig: Verwenden Sie den Programmrumpf im Anhang dieser Aufgabe.  
+ Die Funktion erstellt ein Array “duList”, welches für jeden Tag den Durchschnittswert berechnet.
+ duList[0] ist also der Durchschnittswert für den ersten Tag von “values”, usw.
 
-Sie dürfen die length-Eigenschaft des Java Arrays verwenden.
-System.out.println dürfen Sie immer verwenden.
-Kopieren Sie die Aufgabenstellung als Kommentar oben in die Aufgabe.
+ Von jedem Wert in “duList” soll noch diff abgezogen werden.
 
-Tipp: Nutzen Sie PythonTutor, um das Array zu visualisieren:
-https://pythontutor.com/java.html#mode=edit
+ Die Methode tagTemp() gibt das array duList zurück.
 
-Hinweise:
-Verwenden Sie keine For-Each Schleife
-Funktionen aus der Java-Bibliothek, die hier nicht explizit genannt sind, 
-dürfen Sie nicht verwenden.
+ In der Java Mainfunktion werden alle Werte der zurückgegebenen Liste aufgelistet.
+
+ Hinweis:
+ Ein zweidimensionales array ist ein array, welches weitere Arrays als seine Elemente enthält.
  *******************************************************************************/
+public class alg1
+{
+    public static void main(String[] args) {
+        int [][] temperaturen = {
+                {20, 21, 22, 20, 19, 18, 18, 17, 17, 17, 16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 18, 18, 19, 19},
+                {22, 22, 22, 21, 21, 21, 21, 20, 20, 20, 20, 19, 19, 19, 19, 19, 19, 19, 20, 20, 21, 21, 22, 22},
+                {18, 18, 18, 18, 18, 19, 19, 19, 20, 20, 20, 20, 20, 21, 21, 21, 21, 21, 22, 22, 22, 22, 23, 23},
+                {23, 23, 23, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 21, 21}
+        };
+        double[] result = tagTemp(temperaturen);
+
+        for (int i = 0; i < result.length; i++) {
+            System.out.println(result[i]);
+        }
+    }
+
+    public static double[] tagTemp(int[][] values) {
+        int max = values[0][0];
+        int min = values[0][0];
+
+        for (int i = 0; i < values.length; i++) {
+            for (int j = 0; j < values[i].length; j++) {
+                if (values[i][j] < min) {
+                    min = values[i][j];
+                } else if (max < values[i][j]) {
+                    max = values[i][j];
+                }
+            }
+        }
+        int diff = 0;
+        diff = max - min;
+
+        double[] duList = new double[values.length];
+
+        int sum = 0;
+
+        for (int i = 0; i < values.length; i++) {
+            for (int j = 0; j < values[i].length; j++) {
+                sum += values[i][j];
+            }
+            duList[i] = sum / values[i].length;
+            sum = 0;
+        }
+
+        for (int i = 0; i < duList.length; i++) {
+            duList[i] -= diff;
+        }
+        System.out.println("Max: " + max + "" + "Min:" + min);
+
+        return duList;
+    }
+}
